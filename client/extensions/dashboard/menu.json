@@ -1,0 +1,34 @@
+{
+  "title": "Dashboard",
+  "name": "Dashboard",
+  "version": "0.1.0",
+  "author": "you",
+  "device": "kindle",
+  "actions": [
+    {
+      "name": "Start daemon",
+      "method": "/mnt/us/extensions/dashboard/bin/dashboard.sh start",
+      "confirm": false
+    },
+    {
+      "name": "Stop daemon",
+      "method": "/mnt/us/extensions/dashboard/bin/dashboard.sh stop",
+      "confirm": false
+    },
+    {
+      "name": "Status",
+      "method": "/mnt/us/extensions/dashboard/bin/dashboard.sh status",
+      "confirm": false
+    },
+    {
+      "name": "Fetch once now",
+      "method": "/mnt/us/extensions/dashboard/bin/dashboard.sh once",
+      "confirm": false
+    },
+    {
+      "name": "Block OTA updates",
+      "method": "/mnt/us/extensions/dashboard/bin/ota-block.sh",
+      "confirm": true
+    }
+  ]
+}

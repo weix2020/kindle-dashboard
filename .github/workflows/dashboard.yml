@@ -1,0 +1,53 @@
+name: Generate Dashboard
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时一次
+  workflow_dispatch:       # 手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-core fonts-hack
+
+      - name: Install Python deps
+        working-directory: server
+        run: pip install -r requirements.txt
+
+      - name: Generate dashboard.png
+        working-directory: server
+        run: python dashboard.py
+
+      - name: Stage for Pages
+        run: |
+          mkdir -p docs
+          cp server/dashboard.png docs/dashboard.png
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

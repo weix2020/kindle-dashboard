@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Generated artifacts
+server/dashboard.png
+server/fonts/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Logs
+*.log
+dashboard.log
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Kindle runtime state
+.kindle-dashboard/
+.refresh_cycle
